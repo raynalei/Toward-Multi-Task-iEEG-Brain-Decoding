@@ -18,6 +18,8 @@ def model_name_from_classifier_type(classifier_type):
         return "Transformer"
     elif classifier_type == 'mlp':
         return "MLP"
+    elif classifier_type == 'mamba':
+        return "Mamba"
     else:
         raise ValueError(f"Invalid classifier type: {classifier_type}")
 
@@ -301,7 +303,8 @@ class TransformerClassifier:
         self.val_size = val_size
         self.tol = tol
         self.patience = patience
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        # self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device('cuda')
         self.model = None
         self.classes_ = None
         self.best_val_auroc = 0.0
@@ -516,7 +519,8 @@ class CNNClassifier:
         self.val_size = val_size
         self.tol = tol
         self.patience = patience
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        # self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device('cuda')
         self.model = None
         self.classes_ = None
         self.best_val_auroc = 0.0
@@ -850,7 +854,180 @@ class MLPClassifier:
         predictions = self.predict(X)
         return np.mean(predictions == y)
 
+# ==== NEW: MambaClassifier ====
+class MambaClassifier:
+    def __init__(self, random_state=42, max_iter=100, batch_size=64, learning_rate=0.001,
+                 val_size=0.2, tol=1e-4, patience=10,
+                 d_model=64, d_intermediate=256, n_layers=3, dropout=0.1,
+                 ssm_cfg=None, rms_norm=False, fused_add_norm=False, residual_in_fp32=False):
+        """
+        d_model: Feature embedding dimension (equivalent to d_model in Transformer)
+        d_intermediate: Hidden layer dimension of MLP (equivalent to dim_feedforward in Transformer)
+        n_layers: Number of stacked Mamba/Block layers (equivalent to num_layers in Transformer)
+        ssm_cfg: Configuration dictionary passed to Mamba. Common keys:
+                 - 'layer': 'Mamba2' or 'Mamba1'
+                 - 'd_state': State dimension, typically 16/32
+                 - 'd_conv': Depth convolution kernel length, typically 4/8
+                 - 'expand': Channel expansion factor, typically 2
+        """
 
+        self.random_state = random_state
+        self.max_iter = max_iter
+        self.batch_size = batch_size
+        self.learning_rate = learning_rate
+        self.val_size = val_size
+        self.tol = tol
+        self.patience = patience
+
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.model = None
+        self.classes_ = None
+        self.best_val_auroc = 0.0
+
+        self.d_model = d_model
+        self.d_intermediate = d_intermediate
+        self.n_layers = n_layers
+        self.dropout = dropout
+        self.rms_norm = rms_norm
+        self.fused_add_norm = fused_add_norm
+        self.residual_in_fp32 = residual_in_fp32
+
+        # Default stable Mamba2 configuration
+        self.ssm_cfg = ssm_cfg if ssm_cfg is not None else {
+            "layer": "Mamba2",
+            "d_state": 16,
+            "d_conv": 4,
+            "expand": 2,
+        }
+
+
+    def _create_model(self, input_shape, n_classes):
+        from bidir_mamba import Mamba
+        d_intermediate = getattr(self, "dim_feedforward", 256) 
+        return Mamba(
+            input_shape=input_shape,
+            n_classes=n_classes,
+            d_model=self.d_model,
+            d_intermediate=d_intermediate,    
+            n_layers=self.n_layers,
+            dropout=self.dropout,
+            ssm_cfg={"layer": "Mamba2", "d_state": 16, "d_conv": 4, "expand": 2},
+            rms_norm=False,
+            fused_add_norm=False,
+            residual_in_fp32=False,
+            alternating_directions=True,
+        )
+
+    # ===== Training/validation flow below, kept completely consistent with TransformerClassifier =====
+    def fit(self, X, y):
+
+        X = torch.FloatTensor(X)
+        y = torch.LongTensor(y)
+
+        self.classes_ = np.unique(y)
+        n_classes = len(self.classes_)
+
+        val_size = int(self.val_size * len(X))
+        train_indices = np.arange(len(X) - val_size)
+        val_indices = np.arange(len(X) - val_size, len(X))
+
+        X_train, y_train = X[train_indices], y[train_indices]
+        X_val, y_val = X[val_indices], y[val_indices]
+
+        log(f"Training with {len(X_train)} samples, validating with {len(X_val)} samples", priority=3, indent=2)
+
+        input_shape = X.shape[1:]
+        self.model = self._create_model(input_shape, n_classes).to(self.device)
+
+        criterion = torch.nn.CrossEntropyLoss()
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=self.learning_rate)
+
+        best_val_auroc = 0.0
+        best_model_state = None
+        patience_counter = 0
+
+        for epoch in range(self.max_iter):
+            self.model.train()
+            train_loss = 0.0
+            train_correct = 0
+            train_total = 0
+
+            for i in range(0, len(X_train), self.batch_size):
+                batch_X = X_train[i:i+self.batch_size].to(self.device)
+                batch_y = y_train[i:i+self.batch_size].to(self.device)
+
+                optimizer.zero_grad()
+                outputs = self.model(batch_X)
+                loss = criterion(outputs, batch_y)
+                loss.backward()
+                optimizer.step()
+
+                train_loss += loss.item() * batch_X.size(0)
+                _, predicted = torch.max(outputs.data, 1)
+                train_total += batch_y.size(0)
+                train_correct += (predicted == batch_y).sum().item()
+
+            train_loss = train_loss / train_total
+            train_acc = train_correct / train_total
+
+            # Validation
+            self.model.eval()
+            with torch.no_grad():
+                val_outputs = self.model(X_val.to(self.device))
+                val_loss = criterion(val_outputs, y_val.to(self.device)).item()
+                val_probs = torch.nn.functional.softmax(val_outputs, dim=1).cpu().numpy()
+                y_val_np = y_val.numpy()
+
+                y_val_onehot = np.zeros((len(y_val_np), n_classes))
+                for i, label in enumerate(y_val_np):
+                    y_val_onehot[i, label] = 1
+
+                if n_classes > 2:
+                    val_auroc = roc_auc_score(y_val_onehot, val_probs, multi_class='ovr', average='macro')
+                else:
+                    val_auroc = roc_auc_score(y_val_onehot, val_probs)
+
+                log(f"Epoch {epoch+1}/{self.max_iter}: Train loss: {train_loss:.4f}, Train acc: {train_acc:.4f}, "
+                    f"Val loss: {val_loss:.4f}, Val AUROC: {val_auroc:.4f}", priority=3, indent=2)
+
+                if val_auroc > best_val_auroc + self.tol:
+                    best_val_auroc = val_auroc
+                    best_model_state = {k: v.cpu().clone() for k, v in self.model.state_dict().items()}
+                    patience_counter = 0
+                    log(f"New best model saved with val AUROC: {best_val_auroc:.4f}", priority=3, indent=2)
+                else:
+                    patience_counter += 1
+                    if patience_counter >= self.patience:
+                        log(f"Early stopping triggered after {epoch+1} epochs", priority=3, indent=2)
+                        break
+
+        if best_model_state is not None:
+            self.model.load_state_dict(best_model_state)
+        log(f"Training complete. Best validation AUROC: {best_val_auroc:.4f}", priority=3, indent=2)
+        return self
+
+    def predict_proba(self, X):
+        self.model.eval()
+        all_probs = []
+        with torch.no_grad():
+            X = torch.FloatTensor(X)
+            for i in range(0, len(X), self.batch_size):
+                batch_X = X[i:i+self.batch_size].to(self.device)
+                outputs = self.model(batch_X)
+                probs = torch.nn.functional.softmax(outputs, dim=1)
+                all_probs.append(probs.cpu().numpy())
+        return np.concatenate(all_probs, axis=0)
+
+    def predict(self, X):
+
+        probs = self.predict_proba(X)
+        return self.classes_[np.argmax(probs, axis=1)]
+
+    def score(self, X, y):
+ 
+        predictions = self.predict(X)
+        return np.mean(predictions == y)
+    
 ############## REGION AVERAGING (FOR DS/DM SPLITS) ###############
 
 def get_region_labels(subject):
@@ -902,86 +1079,3 @@ def combine_regions(X_train, X_test, regions_train, regions_test):
         X_test_regions = X_test_regions[:, :, :, 0]
     
     return X_train_regions, X_test_regions, common_regions
-
-############## CHANNEL EMBEDDING ###############
-
-def build_channel_sideinfo(subject, electrode_labels, *, mode="region_onehot"):
-    """
-    Build side-information (channel embeddings) for each electrode based on anatomical maps.
-
-    Args:
-        subject: BrainTreebankSubject instance.
-        electrode_labels (list[str]): Electrode labels currently used in the subject.
-        mode (str): Type of side information to use.
-            - "region_onehot": one-hot vector based on Desikan–Killiany regions.
-            - "coords": continuous 3D coordinates (L, I, P) projected later.
-
-    Returns:
-        info (dict): {
-            "type": "onehot" or "coords",
-            "value": np.ndarray of shape (n_channels, n_features),
-            "classes": list of region names (if mode == "region_onehot")
-        }
-    """
-    
-    meta = subject.get_all_electrode_metadata()
-
-    if mode == "region_onehot":
-        regions = meta["DesikanKilliany"].astype(str).to_numpy()
-        unique_regions, inverse = np.unique(regions, return_inverse=True)
-        onehot = np.eye(len(unique_regions), dtype=np.float32)[inverse]  # (C, R)
-        info = {"type": "onehot", "value": onehot, "classes": list(unique_regions)}
-
-    elif mode == "coords":
-        coords = (
-            meta[["L", "I", "P"]]
-            .to_numpy()
-            .astype(np.float32)
-        )  # (C, 3)
-        info = {"type": "coords", "value": coords}
-
-    else:
-        raise ValueError(f"Invalid mode: {mode}")
-
-    return info
-
-
-def concat_channel_embedding(X, chan_info):
-    """
-    Concatenate channel embeddings to the neural data tensor.
-
-    Args:
-        X (np.ndarray or torch.Tensor):
-            Shape can be (N, C, T) or (N, C, F, T)
-            - N: number of samples
-            - C: number of channels (electrodes)
-            - F: frequency bins (optional)
-            - T: time bins
-        chan_info (dict): Output of build_channel_sideinfo()
-
-    Returns:
-        The same-type array/tensor as input X, with the embedding appended
-        to the feature dimension (last dimension).
-    """
-    was_tensor = isinstance(X, torch.Tensor)
-    if was_tensor:
-        X = X.cpu().numpy()
-
-    if X.ndim == 3:
-        # (N, C, T)
-        emb = chan_info["value"][None, :, None, :]  # (1, C, 1, E)
-        emb = np.repeat(emb, X.shape[0], axis=0)    # (N, C, 1, E)
-        emb = np.repeat(emb, X.shape[-1], axis=2)   # (N, C, T, E)
-        X = np.concatenate([X[..., None], emb], axis=-1)  # (N, C, T, 1+E)
-
-    elif X.ndim == 4:
-        # (N, C, F, T)
-        emb = chan_info["value"][None, :, None, None, :]  # (1, C, 1, 1, E)
-        emb = np.repeat(emb, X.shape[0], axis=0)
-        emb = np.repeat(emb, X.shape[2], axis=2)
-        emb = np.repeat(emb, X.shape[3], axis=3)   # (N, C, F, T, E)
-        X = np.concatenate([X[..., None], emb], axis=-1)  # (N, C, F, T, 1+E)
-    else:
-        raise ValueError("Input X must have 3 or 4 dimensions.")
-
-    return torch.from_numpy(X) if was_tensor else X
