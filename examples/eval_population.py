@@ -51,7 +51,7 @@ parser.add_argument('--preprocess.stft.window', type=str, choices=['hann', 'boxc
 parser.add_argument('--preprocess.stft.max_frequency', type=int, default=150, help='Maximum frequency (Hz) to keep after FFT calculation (only used if preprocess is stft_absangle, stft_realimag, or stft_abs)')
 parser.add_argument('--preprocess.stft.min_frequency', type=int, default=0, help='Minimum frequency (Hz) to keep after FFT calculation (only used if preprocess is stft_absangle, stft_realimag, or stft_abs)')
 
-parser.add_argument('--classifier_type', type=str, choices=['linear', 'cnn', 'transformer', 'mlp'], default='linear', help='Type of classifier to use for evaluation')
+parser.add_argument('--classifier_type', type=str, choices=['linear', 'cnn', 'transformer', 'mlp','mamba'], default='linear', help='Type of classifier to use for evaluation')
 args = parser.parse_args()
 
 eval_names = args.eval_name.split(',')
@@ -190,7 +190,6 @@ for eval_name in eval_names:
             "folds": []
         }
 
-        all_electrode_labels = subject.electrode_labels
         # Loop over all folds
         for fold_idx, fold in enumerate(folds):
             train_dataset = fold["train_dataset"]
@@ -204,8 +203,6 @@ for eval_name in eval_names:
             y_train = np.array([item[1] for item in train_dataset])
             X_test = np.concatenate([preprocess_data(item[0][:, data_idx_from:data_idx_to].unsqueeze(0), subject.electrode_labels, preprocess_type, preprocess_parameters).float().numpy() for item in test_dataset], axis=0)
             y_test = np.array([item[1] for item in test_dataset])
-
-
             gc.collect()  # Collect after creating large arrays
 
             if splits_type == "CrossSubject":
@@ -214,7 +211,6 @@ for eval_name in eval_names:
                 regions_test = get_region_labels(subject)
                 X_train, X_test, common_regions = combine_regions(X_train, X_test, regions_train, regions_test)
 
-            
             # Flatten the data after preprocessing in-place
             original_X_train_shape = X_train.shape
             original_X_test_shape = X_test.shape
@@ -250,6 +246,11 @@ for eval_name in eval_names:
                 X_test = X_test.reshape(original_X_test_shape)
                 clf = MLPClassifier(random_state=seed)
                 clf.fit(X_train, y_train, X_val=X_test, y_val=y_test)
+            elif classifier_type == 'mamba':
+                X_train = X_train.reshape(original_X_train_shape)
+                X_test = X_test.reshape(original_X_test_shape)
+                clf = MambaClassifier(random_state=seed)
+                clf.fit(X_train, y_train)
 
             torch.cuda.empty_cache()
             gc.collect()
