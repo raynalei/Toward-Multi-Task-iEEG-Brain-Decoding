@@ -3,13 +3,12 @@ set -euo pipefail
 
 export PYTHONUNBUFFERED=1
 
-export ROOT_DIR_BRAINTREEBANK="/home/raynalei/Projects/dl/neuroprobe/braintreebank"
+export ROOT_DIR_BRAINTREEBANK=""
 
 
-# subjects / trials：与原脚本一致（12 组）
-a
-# subjects=(3)
-# trials=(0)
+# subjects / trials：
+subjects=(1 1 2 2 3 3 4 4 7 7 10 10)
+trials=(  1 2 0 4 0 1 0 1 0 1  0  1)
 
 eval_names=(
   "frame_brightness"
