@@ -1,0 +1,448 @@
+nohup: ignoring input
+===== NODE INFO =====
+v024.ib.bridges2.psc.edu
+===== GPU INFO =====
+Fri Nov 21 14:35:44 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 560.35.03              Driver Version: 560.35.03      CUDA Version: 12.6     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-32GB           On  |   00000000:3A:00.0 Off |                    0 |
+| N/A   26C    P0             40W /  300W |       1MiB /  32768MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+Eval: frame_brightness,global_flow,local_flow,face_num,volume,pitch,delta_volume,speech,onset,gpt2_surprisal,word_length,word_gap,word_index,word_head_pos,word_part_speech | subj=10 trial=1
+Preproc: laplacian-stft_abs | clf=mamba | split=CrossSession
+Save dir: /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass
+===== SLURM/GPU CHECK =====
+v024.ib.bridges2.psc.edu
+CUDA_VISIBLE_DEVICES=
+Fri Nov 21 14:35:44 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 560.35.03              Driver Version: 560.35.03      CUDA Version: 12.6     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  Tesla V100-SXM2-32GB           On  |   00000000:3A:00.0 Off |                    0 |
+| N/A   26C    P0             40W /  300W |       1MiB /  32768MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+python: 3.10.19
+torch: 2.4.1+cu121
+cuda.is_available: True
+device_count: 1
+CUDA_VISIBLE_DEVICES: None
+[14:36:44 gpu 00.0G ram 008.1G] Subject loaded in 55.47 seconds
+[14:37:23 gpu 00.0G ram 013.4G] Fold 1, Bin 0-1
+[14:37:23 gpu 00.0G ram 013.4G]     Preparing and preprocessing data...
+[15:16:33 gpu 00.0G ram 014.5G]     Standardizing data...
+[15:16:37 gpu 00.0G ram 014.5G]     Training model...
+[15:16:38 gpu 00.0G ram 015.5G]         Training with 2799 samples, validating with 699 samples
+[15:19:48 gpu 00.6G ram 016.4G]         Epoch 1/100: Train loss: 1.1031, Train acc: 0.3955, Val loss: 1.0972, Val AUROC: 0.5336
+[15:19:48 gpu 00.6G ram 016.4G]         New best model saved with val AUROC: 0.5336
+[15:19:49 gpu 00.6G ram 016.4G]         Epoch 2/100: Train loss: 1.0725, Train acc: 0.4391, Val loss: 1.1079, Val AUROC: 0.5156
+[15:19:50 gpu 00.6G ram 016.4G]         Epoch 3/100: Train loss: 1.0188, Train acc: 0.5059, Val loss: 1.1533, Val AUROC: 0.5152
+[15:19:51 gpu 00.6G ram 016.4G]         Epoch 4/100: Train loss: 0.9493, Train acc: 0.5638, Val loss: 1.2146, Val AUROC: 0.5147
+[15:19:52 gpu 00.6G ram 016.4G]         Epoch 5/100: Train loss: 0.8643, Train acc: 0.6224, Val loss: 1.3316, Val AUROC: 0.5198
+[15:19:53 gpu 00.6G ram 016.4G]         Epoch 6/100: Train loss: 0.7896, Train acc: 0.6738, Val loss: 1.3981, Val AUROC: 0.5037
+[15:19:54 gpu 00.6G ram 016.4G]         Epoch 7/100: Train loss: 0.6836, Train acc: 0.7285, Val loss: 1.5512, Val AUROC: 0.5002
+[15:19:55 gpu 00.6G ram 016.4G]         Epoch 8/100: Train loss: 0.5515, Train acc: 0.7846, Val loss: 1.7718, Val AUROC: 0.4912
+[15:19:56 gpu 00.6G ram 016.4G]         Epoch 9/100: Train loss: 0.4154, Train acc: 0.8582, Val loss: 2.1238, Val AUROC: 0.4895
+[15:19:57 gpu 00.6G ram 016.4G]         Epoch 10/100: Train loss: 0.2871, Train acc: 0.9110, Val loss: 2.4564, Val AUROC: 0.4873
+[15:19:58 gpu 00.6G ram 016.4G]         Epoch 11/100: Train loss: 0.1978, Train acc: 0.9450, Val loss: 2.6042, Val AUROC: 0.4901
+[15:19:58 gpu 00.6G ram 016.4G]         Early stopping triggered after 11 epochs
+[15:19:58 gpu 00.6G ram 016.4G]         Training complete. Best validation AUROC: 0.5336
+[15:20:01 gpu 00.3G ram 013.4G] Population, Fold 1, Bin 0-1: Train accuracy: 0.399, Test accuracy: 0.334, Train ROC AUC: 0.565, Test ROC AUC: 0.494
+[15:20:01 gpu 00.3G ram 013.4G] Regression run in 2651.89 seconds
+[15:20:01 gpu 00.3G ram 013.4G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_frame_brightness.json
+[15:21:00 gpu 00.3G ram 014.5G] Fold 1, Bin 0-1
+[15:21:00 gpu 00.3G ram 014.5G]     Preparing and preprocessing data...
+[15:27:13 gpu 00.3G ram 017.3G]     Standardizing data...
+[15:27:18 gpu 00.3G ram 017.3G]     Training model...
+[15:27:18 gpu 00.3G ram 018.1G]         Training with 2799 samples, validating with 699 samples
+[15:27:22 gpu 00.7G ram 018.1G]         Epoch 1/100: Train loss: 1.1050, Train acc: 0.3562, Val loss: 1.0870, Val AUROC: 0.5852
+[15:27:22 gpu 00.7G ram 018.1G]         New best model saved with val AUROC: 0.5852
+[15:27:23 gpu 00.7G ram 018.1G]         Epoch 2/100: Train loss: 1.0447, Train acc: 0.4827, Val loss: 1.0925, Val AUROC: 0.5728
+[15:27:24 gpu 00.7G ram 018.1G]         Epoch 3/100: Train loss: 0.9869, Train acc: 0.5284, Val loss: 1.1167, Val AUROC: 0.5724
+[15:27:25 gpu 00.7G ram 018.1G]         Epoch 4/100: Train loss: 0.9416, Train acc: 0.5623, Val loss: 1.1411, Val AUROC: 0.5820
+[15:27:26 gpu 00.7G ram 018.1G]         Epoch 5/100: Train loss: 0.8949, Train acc: 0.5956, Val loss: 1.1882, Val AUROC: 0.5840
+[15:27:27 gpu 00.7G ram 018.1G]         Epoch 6/100: Train loss: 0.8273, Train acc: 0.6352, Val loss: 1.2449, Val AUROC: 0.5713
+[15:27:29 gpu 00.7G ram 018.1G]         Epoch 7/100: Train loss: 0.6638, Train acc: 0.7385, Val loss: 1.3859, Val AUROC: 0.5652
+[15:27:30 gpu 00.7G ram 018.1G]         Epoch 8/100: Train loss: 0.5366, Train acc: 0.7881, Val loss: 1.5891, Val AUROC: 0.5662
+[15:27:31 gpu 00.7G ram 018.1G]         Epoch 9/100: Train loss: 0.4044, Train acc: 0.8517, Val loss: 1.9776, Val AUROC: 0.5741
+[15:27:32 gpu 00.7G ram 018.1G]         Epoch 10/100: Train loss: 0.3547, Train acc: 0.8671, Val loss: 2.0166, Val AUROC: 0.5810
+[15:27:33 gpu 00.7G ram 018.1G]         Epoch 11/100: Train loss: 0.3491, Train acc: 0.8764, Val loss: 2.0427, Val AUROC: 0.5500
+[15:27:33 gpu 00.7G ram 018.1G]         Early stopping triggered after 11 epochs
+[15:27:33 gpu 00.7G ram 018.1G]         Training complete. Best validation AUROC: 0.5852
+[15:27:35 gpu 00.3G ram 015.2G] Population, Fold 1, Bin 0-1: Train accuracy: 0.454, Test accuracy: 0.354, Train ROC AUC: 0.648, Test ROC AUC: 0.554
+[15:27:35 gpu 00.3G ram 015.2G] Regression run in 454.23 seconds
+[15:27:35 gpu 00.3G ram 015.2G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_global_flow.json
+[15:27:37 gpu 00.3G ram 015.2G] Fold 1, Bin 0-1
+[15:27:37 gpu 00.3G ram 015.2G]     Preparing and preprocessing data...
+[15:28:45 gpu 00.3G ram 017.3G]     Standardizing data...
+[15:28:50 gpu 00.3G ram 017.3G]     Training model...
+[15:28:50 gpu 00.3G ram 018.1G]         Training with 2799 samples, validating with 699 samples
+[15:28:51 gpu 00.7G ram 018.1G]         Epoch 1/100: Train loss: 1.0943, Train acc: 0.3698, Val loss: 1.0885, Val AUROC: 0.5635
+[15:28:51 gpu 00.7G ram 018.1G]         New best model saved with val AUROC: 0.5635
+[15:28:52 gpu 00.7G ram 018.1G]         Epoch 2/100: Train loss: 1.0236, Train acc: 0.5020, Val loss: 1.1381, Val AUROC: 0.5420
+[15:28:53 gpu 00.7G ram 018.1G]         Epoch 3/100: Train loss: 0.9205, Train acc: 0.5881, Val loss: 1.2357, Val AUROC: 0.5221
+[15:28:54 gpu 00.7G ram 018.1G]         Epoch 4/100: Train loss: 0.9225, Train acc: 0.5706, Val loss: 1.2166, Val AUROC: 0.5529
+[15:28:55 gpu 00.7G ram 018.1G]         Epoch 5/100: Train loss: 0.8843, Train acc: 0.5952, Val loss: 1.2188, Val AUROC: 0.5561
+[15:28:56 gpu 00.7G ram 018.1G]         Epoch 6/100: Train loss: 0.7780, Train acc: 0.6670, Val loss: 1.3370, Val AUROC: 0.5457
+[15:28:57 gpu 00.7G ram 018.1G]         Epoch 7/100: Train loss: 0.6696, Train acc: 0.7245, Val loss: 1.5312, Val AUROC: 0.5456
+[15:28:58 gpu 00.7G ram 018.1G]         Epoch 8/100: Train loss: 0.5247, Train acc: 0.7942, Val loss: 1.7932, Val AUROC: 0.5402
+[15:28:59 gpu 00.7G ram 018.1G]         Epoch 9/100: Train loss: 0.3755, Train acc: 0.8599, Val loss: 2.0235, Val AUROC: 0.5430
+[15:29:00 gpu 00.7G ram 018.1G]         Epoch 10/100: Train loss: 0.2763, Train acc: 0.9007, Val loss: 2.2911, Val AUROC: 0.5399
+[15:29:01 gpu 00.7G ram 018.1G]         Epoch 11/100: Train loss: 0.2332, Train acc: 0.9185, Val loss: 2.4619, Val AUROC: 0.5454
+[15:29:01 gpu 00.7G ram 018.1G]         Early stopping triggered after 11 epochs
+[15:29:01 gpu 00.7G ram 018.1G]         Training complete. Best validation AUROC: 0.5635
+[15:29:03 gpu 00.3G ram 015.2G] Population, Fold 1, Bin 0-1: Train accuracy: 0.472, Test accuracy: 0.348, Train ROC AUC: 0.655, Test ROC AUC: 0.548
+[15:29:03 gpu 00.3G ram 015.2G] Regression run in 87.75 seconds
+[15:29:03 gpu 00.3G ram 015.2G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_local_flow.json
+[15:29:04 gpu 00.3G ram 014.6G] Fold 1, Bin 0-1
+[15:29:04 gpu 00.3G ram 014.6G]     Preparing and preprocessing data...
+[15:30:11 gpu 00.3G ram 016.7G]     Standardizing data...
+[15:30:15 gpu 00.3G ram 016.7G]     Training model...
+[15:30:15 gpu 00.3G ram 017.7G]         Training with 2799 samples, validating with 699 samples
+[15:30:16 gpu 00.7G ram 017.7G]         Epoch 1/100: Train loss: 1.1019, Train acc: 0.3591, Val loss: 1.1029, Val AUROC: 0.5073
+[15:30:16 gpu 00.7G ram 017.7G]         New best model saved with val AUROC: 0.5073
+[15:30:17 gpu 00.7G ram 017.7G]         Epoch 2/100: Train loss: 1.0323, Train acc: 0.4652, Val loss: 1.1705, Val AUROC: 0.5019
+[15:30:18 gpu 00.7G ram 017.7G]         Epoch 3/100: Train loss: 0.9996, Train acc: 0.4984, Val loss: 1.2280, Val AUROC: 0.4969
+[15:30:19 gpu 00.7G ram 017.7G]         Epoch 4/100: Train loss: 1.0237, Train acc: 0.4766, Val loss: 1.2281, Val AUROC: 0.4976
+[15:30:20 gpu 00.7G ram 017.7G]         Epoch 5/100: Train loss: 1.0141, Train acc: 0.4937, Val loss: 1.2513, Val AUROC: 0.4979
+[15:30:21 gpu 00.7G ram 017.7G]         Epoch 6/100: Train loss: 0.9951, Train acc: 0.5370, Val loss: 1.2733, Val AUROC: 0.5001
+[15:30:22 gpu 00.7G ram 017.7G]         Epoch 7/100: Train loss: 1.0115, Train acc: 0.5309, Val loss: 1.2304, Val AUROC: 0.5111
+[15:30:22 gpu 00.7G ram 017.7G]         New best model saved with val AUROC: 0.5111
+[15:30:23 gpu 00.7G ram 017.7G]         Epoch 8/100: Train loss: 0.9529, Train acc: 0.5534, Val loss: 1.2525, Val AUROC: 0.5109
+[15:30:24 gpu 00.7G ram 017.7G]         Epoch 9/100: Train loss: 0.9023, Train acc: 0.5813, Val loss: 1.2741, Val AUROC: 0.5227
+[15:30:24 gpu 00.7G ram 017.7G]         New best model saved with val AUROC: 0.5227
+[15:30:25 gpu 00.7G ram 017.7G]         Epoch 10/100: Train loss: 0.8204, Train acc: 0.6356, Val loss: 1.3891, Val AUROC: 0.5022
+[15:30:26 gpu 00.7G ram 017.7G]         Epoch 11/100: Train loss: 0.7593, Train acc: 0.6670, Val loss: 1.4765, Val AUROC: 0.5088
+[15:30:27 gpu 00.7G ram 017.7G]         Epoch 12/100: Train loss: 0.6974, Train acc: 0.7135, Val loss: 1.5845, Val AUROC: 0.5068
+[15:30:29 gpu 00.7G ram 017.7G]         Epoch 13/100: Train loss: 0.5987, Train acc: 0.7549, Val loss: 1.8018, Val AUROC: 0.4986
+[15:30:30 gpu 00.7G ram 017.7G]         Epoch 14/100: Train loss: 0.5131, Train acc: 0.7949, Val loss: 2.0262, Val AUROC: 0.4974
+[15:30:31 gpu 00.7G ram 017.7G]         Epoch 15/100: Train loss: 0.4013, Train acc: 0.8467, Val loss: 2.3290, Val AUROC: 0.4964
+[15:30:32 gpu 00.7G ram 017.7G]         Epoch 16/100: Train loss: 0.3827, Train acc: 0.8553, Val loss: 2.5489, Val AUROC: 0.4955
+[15:30:33 gpu 00.7G ram 017.7G]         Epoch 17/100: Train loss: 0.3702, Train acc: 0.8578, Val loss: 2.4191, Val AUROC: 0.5005
+[15:30:34 gpu 00.7G ram 017.7G]         Epoch 18/100: Train loss: 0.3803, Train acc: 0.8524, Val loss: 2.5827, Val AUROC: 0.5017
+[15:30:35 gpu 00.7G ram 017.7G]         Epoch 19/100: Train loss: 0.2940, Train acc: 0.8910, Val loss: 2.5156, Val AUROC: 0.5056
+[15:30:35 gpu 00.7G ram 017.7G]         Early stopping triggered after 19 epochs
+[15:30:35 gpu 00.7G ram 017.7G]         Training complete. Best validation AUROC: 0.5227
+[15:30:37 gpu 00.3G ram 014.6G] Population, Fold 1, Bin 0-1: Train accuracy: 0.598, Test accuracy: 0.329, Train ROC AUC: 0.769, Test ROC AUC: 0.485
+[15:30:37 gpu 00.3G ram 014.6G] Regression run in 93.98 seconds
+[15:30:37 gpu 00.3G ram 014.6G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_face_num.json
+[15:30:39 gpu 00.3G ram 014.6G] Fold 1, Bin 0-1
+[15:30:39 gpu 00.3G ram 014.6G]     Preparing and preprocessing data...
+[15:31:48 gpu 00.3G ram 016.7G]     Standardizing data...
+[15:31:52 gpu 00.3G ram 016.7G]     Training model...
+[15:31:52 gpu 00.3G ram 017.7G]         Training with 2799 samples, validating with 699 samples
+[15:31:53 gpu 00.7G ram 017.7G]         Epoch 1/100: Train loss: 1.0826, Train acc: 0.3898, Val loss: 1.0956, Val AUROC: 0.5720
+[15:31:53 gpu 00.7G ram 017.7G]         New best model saved with val AUROC: 0.5720
+[15:31:55 gpu 00.7G ram 017.7G]         Epoch 2/100: Train loss: 0.9945, Train acc: 0.5295, Val loss: 1.1477, Val AUROC: 0.5627
+[15:31:56 gpu 00.7G ram 017.7G]         Epoch 3/100: Train loss: 0.9364, Train acc: 0.5673, Val loss: 1.2036, Val AUROC: 0.5510
+[15:31:57 gpu 00.7G ram 017.7G]         Epoch 4/100: Train loss: 0.8590, Train acc: 0.6306, Val loss: 1.2169, Val AUROC: 0.5590
+[15:31:58 gpu 00.7G ram 017.7G]         Epoch 5/100: Train loss: 0.7859, Train acc: 0.6577, Val loss: 1.2727, Val AUROC: 0.5767
+[15:31:58 gpu 00.7G ram 017.7G]         New best model saved with val AUROC: 0.5767
+[15:31:59 gpu 00.7G ram 017.7G]         Epoch 6/100: Train loss: 0.7040, Train acc: 0.7003, Val loss: 1.4022, Val AUROC: 0.5565
+[15:32:00 gpu 00.7G ram 017.7G]         Epoch 7/100: Train loss: 0.5938, Train acc: 0.7692, Val loss: 1.6075, Val AUROC: 0.5604
+[15:32:01 gpu 00.7G ram 017.7G]         Epoch 8/100: Train loss: 0.4771, Train acc: 0.8171, Val loss: 1.7769, Val AUROC: 0.5556
+[15:32:02 gpu 00.7G ram 017.7G]         Epoch 9/100: Train loss: 0.3163, Train acc: 0.8892, Val loss: 2.0140, Val AUROC: 0.5501
+[15:32:04 gpu 00.7G ram 017.7G]         Epoch 10/100: Train loss: 0.2234, Train acc: 0.9243, Val loss: 2.2726, Val AUROC: 0.5412
+[15:32:05 gpu 00.7G ram 017.7G]         Epoch 11/100: Train loss: 0.1582, Train acc: 0.9511, Val loss: 2.4371, Val AUROC: 0.5535
+[15:32:06 gpu 00.7G ram 017.7G]         Epoch 12/100: Train loss: 0.1079, Train acc: 0.9664, Val loss: 2.5589, Val AUROC: 0.5638
+[15:32:07 gpu 00.7G ram 017.7G]         Epoch 13/100: Train loss: 0.0823, Train acc: 0.9793, Val loss: 2.8146, Val AUROC: 0.5521
+[15:32:08 gpu 00.7G ram 017.7G]         Epoch 14/100: Train loss: 0.0856, Train acc: 0.9800, Val loss: 2.9413, Val AUROC: 0.5483
+[15:32:09 gpu 00.7G ram 017.7G]         Epoch 15/100: Train loss: 0.0566, Train acc: 0.9843, Val loss: 3.1313, Val AUROC: 0.5517
+[15:32:09 gpu 00.7G ram 017.7G]         Early stopping triggered after 15 epochs
+[15:32:09 gpu 00.7G ram 017.7G]         Training complete. Best validation AUROC: 0.5767
+[15:32:12 gpu 00.3G ram 014.6G] Population, Fold 1, Bin 0-1: Train accuracy: 0.640, Test accuracy: 0.343, Train ROC AUC: 0.824, Test ROC AUC: 0.558
+[15:32:12 gpu 00.3G ram 014.6G] Regression run in 94.31 seconds
+[15:32:12 gpu 00.3G ram 014.6G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_volume.json
+[15:32:13 gpu 00.3G ram 014.6G] Fold 1, Bin 0-1
+[15:32:13 gpu 00.3G ram 014.6G]     Preparing and preprocessing data...
+[15:33:22 gpu 00.3G ram 016.7G]     Standardizing data...
+[15:33:27 gpu 00.3G ram 016.7G]     Training model...
+[15:33:27 gpu 00.3G ram 017.7G]         Training with 2799 samples, validating with 699 samples
+[15:33:28 gpu 00.7G ram 017.7G]         Epoch 1/100: Train loss: 1.0935, Train acc: 0.3708, Val loss: 1.0934, Val AUROC: 0.5772
+[15:33:28 gpu 00.7G ram 017.7G]         New best model saved with val AUROC: 0.5772
+[15:33:29 gpu 00.7G ram 017.7G]         Epoch 2/100: Train loss: 1.0216, Train acc: 0.4941, Val loss: 1.1254, Val AUROC: 0.5601
+[15:33:30 gpu 00.7G ram 017.7G]         Epoch 3/100: Train loss: 0.9549, Train acc: 0.5380, Val loss: 1.1670, Val AUROC: 0.5677
+[15:33:31 gpu 00.7G ram 017.7G]         Epoch 4/100: Train loss: 0.8552, Train acc: 0.6113, Val loss: 1.2925, Val AUROC: 0.5534
+[15:33:32 gpu 00.7G ram 017.7G]         Epoch 5/100: Train loss: 0.7079, Train acc: 0.7045, Val loss: 1.4267, Val AUROC: 0.5503
+[15:33:33 gpu 00.7G ram 017.7G]         Epoch 6/100: Train loss: 0.5236, Train acc: 0.8003, Val loss: 1.6335, Val AUROC: 0.5454
+[15:33:34 gpu 00.7G ram 017.7G]         Epoch 7/100: Train loss: 0.3648, Train acc: 0.8714, Val loss: 2.0223, Val AUROC: 0.5425
+[15:33:35 gpu 00.7G ram 017.7G]         Epoch 8/100: Train loss: 0.3089, Train acc: 0.8896, Val loss: 2.5152, Val AUROC: 0.5153
+[15:33:36 gpu 00.7G ram 017.7G]         Epoch 9/100: Train loss: 0.2482, Train acc: 0.9150, Val loss: 2.2323, Val AUROC: 0.5317
+[15:33:37 gpu 00.7G ram 017.7G]         Epoch 10/100: Train loss: 0.1558, Train acc: 0.9461, Val loss: 2.4662, Val AUROC: 0.5228
+[15:33:39 gpu 00.7G ram 017.7G]         Epoch 11/100: Train loss: 0.1344, Train acc: 0.9632, Val loss: 2.6854, Val AUROC: 0.5198
+[15:33:39 gpu 00.7G ram 017.7G]         Early stopping triggered after 11 epochs
+[15:33:39 gpu 00.7G ram 017.7G]         Training complete. Best validation AUROC: 0.5772
+[15:33:41 gpu 00.3G ram 014.6G] Population, Fold 1, Bin 0-1: Train accuracy: 0.439, Test accuracy: 0.344, Train ROC AUC: 0.640, Test ROC AUC: 0.529
+[15:33:41 gpu 00.3G ram 014.6G] Regression run in 89.09 seconds
+[15:33:41 gpu 00.3G ram 014.6G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_pitch.json
+[15:33:42 gpu 00.3G ram 014.6G] Fold 1, Bin 0-1
+[15:33:42 gpu 00.3G ram 014.6G]     Preparing and preprocessing data...
+[15:34:50 gpu 00.3G ram 017.2G]     Standardizing data...
+[15:34:55 gpu 00.3G ram 017.2G]     Training model...
+[15:34:55 gpu 00.3G ram 018.0G]         Training with 2799 samples, validating with 699 samples
+[15:34:56 gpu 00.7G ram 018.0G]         Epoch 1/100: Train loss: 1.0831, Train acc: 0.3944, Val loss: 1.0488, Val AUROC: 0.6252
+[15:34:56 gpu 00.7G ram 018.0G]         New best model saved with val AUROC: 0.6252
+[15:34:57 gpu 00.7G ram 018.0G]         Epoch 2/100: Train loss: 0.9848, Train acc: 0.5259, Val loss: 1.0720, Val AUROC: 0.6125
+[15:34:58 gpu 00.7G ram 018.0G]         Epoch 3/100: Train loss: 0.8972, Train acc: 0.5963, Val loss: 1.1438, Val AUROC: 0.5963
+[15:34:59 gpu 00.7G ram 018.0G]         Epoch 4/100: Train loss: 0.8216, Train acc: 0.6402, Val loss: 1.2282, Val AUROC: 0.5865
+[15:34:59 gpu 00.7G ram 018.0G]         Epoch 5/100: Train loss: 0.6954, Train acc: 0.7095, Val loss: 1.3971, Val AUROC: 0.5676
+[15:35:00 gpu 00.7G ram 018.0G]         Epoch 6/100: Train loss: 0.4781, Train acc: 0.8164, Val loss: 1.6523, Val AUROC: 0.5750
+[15:35:01 gpu 00.7G ram 018.0G]         Epoch 7/100: Train loss: 0.3543, Train acc: 0.8657, Val loss: 1.7887, Val AUROC: 0.5791
+[15:35:02 gpu 00.7G ram 018.0G]         Epoch 8/100: Train loss: 0.2625, Train acc: 0.9153, Val loss: 2.2525, Val AUROC: 0.5719
+[15:35:03 gpu 00.7G ram 018.0G]         Epoch 9/100: Train loss: 0.1831, Train acc: 0.9421, Val loss: 2.2038, Val AUROC: 0.5733
+[15:35:04 gpu 00.7G ram 018.0G]         Epoch 10/100: Train loss: 0.0903, Train acc: 0.9775, Val loss: 2.4626, Val AUROC: 0.5727
+[15:35:05 gpu 00.7G ram 018.0G]         Epoch 11/100: Train loss: 0.0713, Train acc: 0.9804, Val loss: 2.6458, Val AUROC: 0.5739
+[15:35:05 gpu 00.7G ram 018.0G]         Early stopping triggered after 11 epochs
+[15:35:05 gpu 00.7G ram 018.0G]         Training complete. Best validation AUROC: 0.6252
+[15:35:08 gpu 00.3G ram 015.1G] Population, Fold 1, Bin 0-1: Train accuracy: 0.508, Test accuracy: 0.440, Train ROC AUC: 0.709, Test ROC AUC: 0.646
+[15:35:08 gpu 00.3G ram 015.1G] Regression run in 86.62 seconds
+[15:35:08 gpu 00.3G ram 015.1G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_delta_volume.json
+[15:35:09 gpu 00.3G ram 015.1G] Fold 1, Bin 0-1
+[15:35:09 gpu 00.3G ram 015.1G]     Preparing and preprocessing data...
+[15:36:15 gpu 00.3G ram 017.1G]     Standardizing data...
+[15:36:19 gpu 00.3G ram 017.1G]     Training model...
+[15:36:19 gpu 00.3G ram 017.9G]         Training with 2800 samples, validating with 700 samples
+[15:36:20 gpu 00.7G ram 017.9G]         Epoch 1/100: Train loss: 0.5648, Train acc: 0.7318, Val loss: 0.5367, Val AUROC: 0.8160
+[15:36:20 gpu 00.7G ram 017.9G]         New best model saved with val AUROC: 0.8160
+[15:36:21 gpu 00.7G ram 017.9G]         Epoch 2/100: Train loss: 0.5255, Train acc: 0.7575, Val loss: 0.5065, Val AUROC: 0.8364
+[15:36:21 gpu 00.7G ram 017.9G]         New best model saved with val AUROC: 0.8364
+[15:36:22 gpu 00.7G ram 017.9G]         Epoch 3/100: Train loss: 0.4452, Train acc: 0.8014, Val loss: 0.4993, Val AUROC: 0.8404
+[15:36:22 gpu 00.7G ram 017.9G]         New best model saved with val AUROC: 0.8404
+[15:36:23 gpu 00.7G ram 017.9G]         Epoch 4/100: Train loss: 0.4113, Train acc: 0.8182, Val loss: 0.5217, Val AUROC: 0.8291
+[15:36:24 gpu 00.7G ram 017.9G]         Epoch 5/100: Train loss: 0.3966, Train acc: 0.8275, Val loss: 0.5167, Val AUROC: 0.8346
+[15:36:25 gpu 00.7G ram 017.9G]         Epoch 6/100: Train loss: 0.3736, Train acc: 0.8389, Val loss: 0.5295, Val AUROC: 0.8332
+[15:36:26 gpu 00.7G ram 017.9G]         Epoch 7/100: Train loss: 0.3291, Train acc: 0.8621, Val loss: 0.5250, Val AUROC: 0.8427
+[15:36:26 gpu 00.7G ram 017.9G]         New best model saved with val AUROC: 0.8427
+[15:36:27 gpu 00.7G ram 017.9G]         Epoch 8/100: Train loss: 0.2910, Train acc: 0.8761, Val loss: 0.5843, Val AUROC: 0.8310
+[15:36:28 gpu 00.7G ram 017.9G]         Epoch 9/100: Train loss: 0.2318, Train acc: 0.9075, Val loss: 0.6184, Val AUROC: 0.8341
+[15:36:29 gpu 00.7G ram 017.9G]         Epoch 10/100: Train loss: 0.1595, Train acc: 0.9386, Val loss: 0.7279, Val AUROC: 0.8275
+[15:36:30 gpu 00.7G ram 017.9G]         Epoch 11/100: Train loss: 0.1329, Train acc: 0.9543, Val loss: 0.7884, Val AUROC: 0.8344
+[15:36:31 gpu 00.7G ram 017.9G]         Epoch 12/100: Train loss: 0.0962, Train acc: 0.9675, Val loss: 0.9293, Val AUROC: 0.8307
+[15:36:32 gpu 00.7G ram 017.9G]         Epoch 13/100: Train loss: 0.0611, Train acc: 0.9818, Val loss: 0.9342, Val AUROC: 0.8377
+[15:36:33 gpu 00.7G ram 017.9G]         Epoch 14/100: Train loss: 0.0513, Train acc: 0.9843, Val loss: 0.9908, Val AUROC: 0.8412
+[15:36:34 gpu 00.7G ram 017.9G]         Epoch 15/100: Train loss: 0.0362, Train acc: 0.9886, Val loss: 1.0436, Val AUROC: 0.8394
+[15:36:35 gpu 00.7G ram 017.9G]         Epoch 16/100: Train loss: 0.0356, Train acc: 0.9900, Val loss: 1.0688, Val AUROC: 0.8430
+[15:36:35 gpu 00.7G ram 017.9G]         New best model saved with val AUROC: 0.8430
+[15:36:36 gpu 00.7G ram 017.9G]         Epoch 17/100: Train loss: 0.0177, Train acc: 0.9964, Val loss: 1.1337, Val AUROC: 0.8510
+[15:36:36 gpu 00.7G ram 017.9G]         New best model saved with val AUROC: 0.8510
+[15:36:37 gpu 00.7G ram 017.9G]         Epoch 18/100: Train loss: 0.0207, Train acc: 0.9932, Val loss: 1.1444, Val AUROC: 0.8474
+[15:36:38 gpu 00.7G ram 017.9G]         Epoch 19/100: Train loss: 0.0225, Train acc: 0.9921, Val loss: 1.1934, Val AUROC: 0.8424
+[15:36:39 gpu 00.7G ram 017.9G]         Epoch 20/100: Train loss: 0.0218, Train acc: 0.9939, Val loss: 1.2581, Val AUROC: 0.8343
+[15:36:40 gpu 00.7G ram 017.9G]         Epoch 21/100: Train loss: 0.0108, Train acc: 0.9971, Val loss: 1.4098, Val AUROC: 0.8293
+[15:36:41 gpu 00.7G ram 017.9G]         Epoch 22/100: Train loss: 0.0066, Train acc: 0.9986, Val loss: 1.3848, Val AUROC: 0.8326
+[15:36:42 gpu 00.7G ram 017.9G]         Epoch 23/100: Train loss: 0.0028, Train acc: 1.0000, Val loss: 1.4177, Val AUROC: 0.8319
+[15:36:43 gpu 00.7G ram 017.9G]         Epoch 24/100: Train loss: 0.0010, Train acc: 1.0000, Val loss: 1.4730, Val AUROC: 0.8317
+[15:36:44 gpu 00.7G ram 017.9G]         Epoch 25/100: Train loss: 0.0007, Train acc: 1.0000, Val loss: 1.5162, Val AUROC: 0.8307
+[15:36:45 gpu 00.7G ram 017.9G]         Epoch 26/100: Train loss: 0.0005, Train acc: 1.0000, Val loss: 1.5480, Val AUROC: 0.8304
+[15:36:46 gpu 00.7G ram 017.9G]         Epoch 27/100: Train loss: 0.0005, Train acc: 1.0000, Val loss: 1.5762, Val AUROC: 0.8301
+[15:36:46 gpu 00.7G ram 017.9G]         Early stopping triggered after 27 epochs
+[15:36:46 gpu 00.7G ram 017.9G]         Training complete. Best validation AUROC: 0.8510
+[15:36:48 gpu 00.3G ram 015.1G] Population, Fold 1, Bin 0-1: Train accuracy: 0.941, Test accuracy: 0.702, Train ROC AUC: 0.980, Test ROC AUC: 0.845
+[15:36:48 gpu 00.3G ram 015.1G] Regression run in 100.21 seconds
+[15:36:48 gpu 00.3G ram 015.1G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_speech.json
+[15:36:49 gpu 00.3G ram 014.6G] Fold 1, Bin 0-1
+[15:36:49 gpu 00.3G ram 014.6G]     Preparing and preprocessing data...
+[15:37:53 gpu 00.3G ram 016.6G]     Standardizing data...
+[15:37:58 gpu 00.3G ram 016.6G]     Training model...
+[15:37:58 gpu 00.3G ram 017.6G]         Training with 2652 samples, validating with 662 samples
+[15:38:15 gpu 00.6G ram 017.6G]         Epoch 1/100: Train loss: 0.4994, Train acc: 0.7734, Val loss: 0.4545, Val AUROC: 0.8799
+[15:38:15 gpu 00.6G ram 017.6G]         New best model saved with val AUROC: 0.8799
+[15:38:16 gpu 00.6G ram 017.6G]         Epoch 2/100: Train loss: 0.4663, Train acc: 0.7934, Val loss: 0.4325, Val AUROC: 0.8902
+[15:38:16 gpu 00.6G ram 017.6G]         New best model saved with val AUROC: 0.8902
+[15:38:17 gpu 00.6G ram 017.6G]         Epoch 3/100: Train loss: 0.3592, Train acc: 0.8401, Val loss: 0.3951, Val AUROC: 0.9059
+[15:38:17 gpu 00.6G ram 017.6G]         New best model saved with val AUROC: 0.9059
+[15:38:18 gpu 00.6G ram 017.6G]         Epoch 4/100: Train loss: 0.3408, Train acc: 0.8556, Val loss: 0.3922, Val AUROC: 0.9071
+[15:38:18 gpu 00.6G ram 017.6G]         New best model saved with val AUROC: 0.9071
+[15:38:19 gpu 00.6G ram 017.6G]         Epoch 5/100: Train loss: 0.3059, Train acc: 0.8725, Val loss: 0.3666, Val AUROC: 0.9215
+[15:38:19 gpu 00.6G ram 017.6G]         New best model saved with val AUROC: 0.9215
+[15:38:19 gpu 00.6G ram 017.6G]         Epoch 6/100: Train loss: 0.2653, Train acc: 0.8974, Val loss: 0.4083, Val AUROC: 0.9095
+[15:38:20 gpu 00.6G ram 017.6G]         Epoch 7/100: Train loss: 0.2657, Train acc: 0.8956, Val loss: 0.3799, Val AUROC: 0.9177
+[15:38:21 gpu 00.6G ram 017.6G]         Epoch 8/100: Train loss: 0.2017, Train acc: 0.9295, Val loss: 0.4316, Val AUROC: 0.9089
+[15:38:22 gpu 00.6G ram 017.6G]         Epoch 9/100: Train loss: 0.1539, Train acc: 0.9404, Val loss: 0.4969, Val AUROC: 0.9058
+[15:38:23 gpu 00.6G ram 017.6G]         Epoch 10/100: Train loss: 0.1076, Train acc: 0.9634, Val loss: 0.6188, Val AUROC: 0.8976
+[15:38:24 gpu 00.6G ram 017.6G]         Epoch 11/100: Train loss: 0.0726, Train acc: 0.9785, Val loss: 0.6423, Val AUROC: 0.9020
+[15:38:25 gpu 00.6G ram 017.6G]         Epoch 12/100: Train loss: 0.0445, Train acc: 0.9894, Val loss: 0.6306, Val AUROC: 0.9135
+[15:38:26 gpu 00.6G ram 017.6G]         Epoch 13/100: Train loss: 0.0246, Train acc: 0.9959, Val loss: 0.5996, Val AUROC: 0.9162
+[15:38:27 gpu 00.6G ram 017.6G]         Epoch 14/100: Train loss: 0.0172, Train acc: 0.9977, Val loss: 0.7248, Val AUROC: 0.9058
+[15:38:28 gpu 00.6G ram 017.6G]         Epoch 15/100: Train loss: 0.0225, Train acc: 0.9947, Val loss: 0.6932, Val AUROC: 0.9066
+[15:38:28 gpu 00.6G ram 017.6G]         Early stopping triggered after 15 epochs
+[15:38:28 gpu 00.6G ram 017.6G]         Training complete. Best validation AUROC: 0.9215
+[15:38:30 gpu 00.3G ram 014.7G] Population, Fold 1, Bin 0-1: Train accuracy: 0.884, Test accuracy: 0.850, Train ROC AUC: 0.954, Test ROC AUC: 0.922
+[15:38:30 gpu 00.3G ram 014.7G] Regression run in 101.94 seconds
+[15:38:30 gpu 00.3G ram 014.7G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_onset.json
+[15:38:31 gpu 00.3G ram 014.7G] Fold 1, Bin 0-1
+[15:38:31 gpu 00.3G ram 014.7G]     Preparing and preprocessing data...
+[15:39:38 gpu 00.3G ram 016.8G]     Standardizing data...
+[15:39:42 gpu 00.3G ram 016.8G]     Training model...
+[15:39:42 gpu 00.3G ram 017.8G]         Training with 2799 samples, validating with 699 samples
+[15:39:43 gpu 00.7G ram 017.8G]         Epoch 1/100: Train loss: 1.0943, Train acc: 0.3755, Val loss: 1.0803, Val AUROC: 0.5712
+[15:39:43 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.5712
+[15:39:44 gpu 00.7G ram 017.8G]         Epoch 2/100: Train loss: 1.0154, Train acc: 0.5027, Val loss: 1.1198, Val AUROC: 0.5565
+[15:39:45 gpu 00.7G ram 017.8G]         Epoch 3/100: Train loss: 0.9524, Train acc: 0.5581, Val loss: 1.1685, Val AUROC: 0.5486
+[15:39:46 gpu 00.7G ram 017.8G]         Epoch 4/100: Train loss: 0.8434, Train acc: 0.6234, Val loss: 1.2602, Val AUROC: 0.5561
+[15:39:47 gpu 00.7G ram 017.8G]         Epoch 5/100: Train loss: 0.7216, Train acc: 0.6974, Val loss: 1.4104, Val AUROC: 0.5504
+[15:39:48 gpu 00.7G ram 017.8G]         Epoch 6/100: Train loss: 0.5162, Train acc: 0.8039, Val loss: 1.6097, Val AUROC: 0.5590
+[15:39:49 gpu 00.7G ram 017.8G]         Epoch 7/100: Train loss: 0.3284, Train acc: 0.8889, Val loss: 2.0367, Val AUROC: 0.5479
+[15:39:50 gpu 00.7G ram 017.8G]         Epoch 8/100: Train loss: 0.2120, Train acc: 0.9289, Val loss: 2.3271, Val AUROC: 0.5402
+[15:39:51 gpu 00.7G ram 017.8G]         Epoch 9/100: Train loss: 0.2069, Train acc: 0.9335, Val loss: 2.4611, Val AUROC: 0.5520
+[15:39:52 gpu 00.7G ram 017.8G]         Epoch 10/100: Train loss: 0.1377, Train acc: 0.9546, Val loss: 2.4266, Val AUROC: 0.5599
+[15:39:52 gpu 00.7G ram 017.8G]         Epoch 11/100: Train loss: 0.0922, Train acc: 0.9736, Val loss: 2.6650, Val AUROC: 0.5503
+[15:39:52 gpu 00.7G ram 017.8G]         Early stopping triggered after 11 epochs
+[15:39:52 gpu 00.7G ram 017.8G]         Training complete. Best validation AUROC: 0.5712
+[15:39:55 gpu 00.3G ram 014.7G] Population, Fold 1, Bin 0-1: Train accuracy: 0.467, Test accuracy: 0.371, Train ROC AUC: 0.686, Test ROC AUC: 0.537
+[15:39:55 gpu 00.3G ram 014.7G] Regression run in 84.73 seconds
+[15:39:55 gpu 00.3G ram 014.7G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_gpt2_surprisal.json
+[15:39:56 gpu 00.3G ram 014.7G] Fold 1, Bin 0-1
+[15:39:56 gpu 00.3G ram 014.7G]     Preparing and preprocessing data...
+[15:41:02 gpu 00.3G ram 016.8G]     Standardizing data...
+[15:41:07 gpu 00.3G ram 016.8G]     Training model...
+[15:41:07 gpu 00.3G ram 017.8G]         Training with 2799 samples, validating with 699 samples
+[15:41:08 gpu 00.7G ram 017.8G]         Epoch 1/100: Train loss: 1.0958, Train acc: 0.3587, Val loss: 1.0881, Val AUROC: 0.5624
+[15:41:08 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.5624
+[15:41:09 gpu 00.7G ram 017.8G]         Epoch 2/100: Train loss: 1.0123, Train acc: 0.4930, Val loss: 1.1339, Val AUROC: 0.5536
+[15:41:10 gpu 00.7G ram 017.8G]         Epoch 3/100: Train loss: 0.9340, Train acc: 0.5595, Val loss: 1.1721, Val AUROC: 0.5736
+[15:41:10 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.5736
+[15:41:11 gpu 00.7G ram 017.8G]         Epoch 4/100: Train loss: 0.8500, Train acc: 0.6220, Val loss: 1.2602, Val AUROC: 0.5769
+[15:41:11 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.5769
+[15:41:12 gpu 00.7G ram 017.8G]         Epoch 5/100: Train loss: 0.7524, Train acc: 0.6785, Val loss: 1.3882, Val AUROC: 0.5608
+[15:41:13 gpu 00.7G ram 017.8G]         Epoch 6/100: Train loss: 0.5403, Train acc: 0.7814, Val loss: 1.6982, Val AUROC: 0.5549
+[15:41:13 gpu 00.7G ram 017.8G]         Epoch 7/100: Train loss: 0.3403, Train acc: 0.8810, Val loss: 2.0145, Val AUROC: 0.5631
+[15:41:14 gpu 00.7G ram 017.8G]         Epoch 8/100: Train loss: 0.2233, Train acc: 0.9303, Val loss: 2.2526, Val AUROC: 0.5614
+[15:41:15 gpu 00.7G ram 017.8G]         Epoch 9/100: Train loss: 0.2433, Train acc: 0.9014, Val loss: 2.4866, Val AUROC: 0.5505
+[15:41:16 gpu 00.7G ram 017.8G]         Epoch 10/100: Train loss: 0.1470, Train acc: 0.9489, Val loss: 2.5033, Val AUROC: 0.5645
+[15:41:17 gpu 00.7G ram 017.8G]         Epoch 11/100: Train loss: 0.0868, Train acc: 0.9743, Val loss: 2.8494, Val AUROC: 0.5637
+[15:41:18 gpu 00.7G ram 017.8G]         Epoch 12/100: Train loss: 0.0688, Train acc: 0.9832, Val loss: 3.0717, Val AUROC: 0.5617
+[15:41:19 gpu 00.7G ram 017.8G]         Epoch 13/100: Train loss: 0.0333, Train acc: 0.9918, Val loss: 2.9168, Val AUROC: 0.5617
+[15:41:20 gpu 00.7G ram 017.8G]         Epoch 14/100: Train loss: 0.0134, Train acc: 0.9996, Val loss: 3.0575, Val AUROC: 0.5636
+[15:41:20 gpu 00.7G ram 017.8G]         Early stopping triggered after 14 epochs
+[15:41:20 gpu 00.7G ram 017.8G]         Training complete. Best validation AUROC: 0.5769
+[15:41:22 gpu 00.3G ram 014.8G] Population, Fold 1, Bin 0-1: Train accuracy: 0.652, Test accuracy: 0.398, Train ROC AUC: 0.815, Test ROC AUC: 0.568
+[15:41:22 gpu 00.3G ram 014.8G] Regression run in 87.54 seconds
+[15:41:23 gpu 00.3G ram 014.8G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_word_length.json
+[15:41:32 gpu 00.3G ram 014.8G] Fold 1, Bin 0-1
+[15:41:32 gpu 00.3G ram 014.8G]     Preparing and preprocessing data...
+[15:42:39 gpu 00.3G ram 016.8G]     Standardizing data...
+[15:42:43 gpu 00.3G ram 016.8G]     Training model...
+[15:42:43 gpu 00.3G ram 017.8G]         Training with 2799 samples, validating with 699 samples
+[15:42:44 gpu 00.7G ram 017.8G]         Epoch 1/100: Train loss: 1.0929, Train acc: 0.3830, Val loss: 1.0759, Val AUROC: 0.5861
+[15:42:44 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.5861
+[15:42:45 gpu 00.7G ram 017.8G]         Epoch 2/100: Train loss: 1.0104, Train acc: 0.4745, Val loss: 1.0884, Val AUROC: 0.5954
+[15:42:45 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.5954
+[15:42:46 gpu 00.7G ram 017.8G]         Epoch 3/100: Train loss: 0.9524, Train acc: 0.5045, Val loss: 1.1030, Val AUROC: 0.5941
+[15:42:47 gpu 00.7G ram 017.8G]         Epoch 4/100: Train loss: 0.9190, Train acc: 0.5448, Val loss: 1.1287, Val AUROC: 0.6003
+[15:42:47 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.6003
+[15:42:48 gpu 00.7G ram 017.8G]         Epoch 5/100: Train loss: 0.9268, Train acc: 0.5502, Val loss: 1.1351, Val AUROC: 0.5967
+[15:42:49 gpu 00.7G ram 017.8G]         Epoch 6/100: Train loss: 0.8763, Train acc: 0.5945, Val loss: 1.1774, Val AUROC: 0.5862
+[15:42:50 gpu 00.7G ram 017.8G]         Epoch 7/100: Train loss: 0.7893, Train acc: 0.6488, Val loss: 1.2573, Val AUROC: 0.5817
+[15:42:51 gpu 00.7G ram 017.8G]         Epoch 8/100: Train loss: 0.6884, Train acc: 0.7110, Val loss: 1.3823, Val AUROC: 0.5789
+[15:42:51 gpu 00.7G ram 017.8G]         Epoch 9/100: Train loss: 0.5540, Train acc: 0.7849, Val loss: 1.5875, Val AUROC: 0.5689
+[15:42:52 gpu 00.7G ram 017.8G]         Epoch 10/100: Train loss: 0.4032, Train acc: 0.8449, Val loss: 1.9291, Val AUROC: 0.5626
+[15:42:53 gpu 00.7G ram 017.8G]         Epoch 11/100: Train loss: 0.3017, Train acc: 0.8889, Val loss: 2.3621, Val AUROC: 0.5638
+[15:42:54 gpu 00.7G ram 017.8G]         Epoch 12/100: Train loss: 0.2907, Train acc: 0.8917, Val loss: 2.2479, Val AUROC: 0.5542
+[15:42:55 gpu 00.7G ram 017.8G]         Epoch 13/100: Train loss: 0.2294, Train acc: 0.9121, Val loss: 2.3337, Val AUROC: 0.5494
+[15:42:56 gpu 00.7G ram 017.8G]         Epoch 14/100: Train loss: 0.1523, Train acc: 0.9550, Val loss: 2.6215, Val AUROC: 0.5616
+[15:42:56 gpu 00.7G ram 017.8G]         Early stopping triggered after 14 epochs
+[15:42:56 gpu 00.7G ram 017.8G]         Training complete. Best validation AUROC: 0.6003
+[15:42:58 gpu 00.3G ram 014.7G] Population, Fold 1, Bin 0-1: Train accuracy: 0.535, Test accuracy: 0.392, Train ROC AUC: 0.738, Test ROC AUC: 0.576
+[15:42:58 gpu 00.3G ram 014.7G] Regression run in 95.79 seconds
+[15:42:58 gpu 00.3G ram 014.7G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_word_gap.json
+[15:43:00 gpu 00.3G ram 014.7G] Fold 1, Bin 0-1
+[15:43:00 gpu 00.3G ram 014.7G]     Preparing and preprocessing data...
+[15:44:08 gpu 00.3G ram 016.8G]     Standardizing data...
+[15:44:13 gpu 00.3G ram 016.8G]     Training model...
+[15:44:13 gpu 00.3G ram 017.8G]         Training with 2799 samples, validating with 699 samples
+[15:44:14 gpu 00.7G ram 017.8G]         Epoch 1/100: Train loss: 0.9876, Train acc: 0.5152, Val loss: 0.9315, Val AUROC: 0.7414
+[15:44:14 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.7414
+[15:44:15 gpu 00.7G ram 017.8G]         Epoch 2/100: Train loss: 0.7812, Train acc: 0.6649, Val loss: 0.9677, Val AUROC: 0.7450
+[15:44:15 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.7450
+[15:44:16 gpu 00.7G ram 017.8G]         Epoch 3/100: Train loss: 0.6739, Train acc: 0.7156, Val loss: 1.0593, Val AUROC: 0.7314
+[15:44:17 gpu 00.7G ram 017.8G]         Epoch 4/100: Train loss: 0.5318, Train acc: 0.7878, Val loss: 1.2560, Val AUROC: 0.7018
+[15:44:18 gpu 00.7G ram 017.8G]         Epoch 5/100: Train loss: 0.3556, Train acc: 0.8803, Val loss: 1.5082, Val AUROC: 0.6856
+[15:44:19 gpu 00.7G ram 017.8G]         Epoch 6/100: Train loss: 0.2063, Train acc: 0.9360, Val loss: 1.7591, Val AUROC: 0.6911
+[15:44:19 gpu 00.7G ram 017.8G]         Epoch 7/100: Train loss: 0.1560, Train acc: 0.9514, Val loss: 2.0123, Val AUROC: 0.6902
+[15:44:20 gpu 00.7G ram 017.8G]         Epoch 8/100: Train loss: 0.1233, Train acc: 0.9614, Val loss: 2.0078, Val AUROC: 0.6977
+[15:44:21 gpu 00.7G ram 017.8G]         Epoch 9/100: Train loss: 0.1490, Train acc: 0.9489, Val loss: 2.1244, Val AUROC: 0.7001
+[15:44:22 gpu 00.7G ram 017.8G]         Epoch 10/100: Train loss: 0.0977, Train acc: 0.9671, Val loss: 2.1903, Val AUROC: 0.6888
+[15:44:23 gpu 00.7G ram 017.8G]         Epoch 11/100: Train loss: 0.0474, Train acc: 0.9875, Val loss: 2.3365, Val AUROC: 0.6936
+[15:44:24 gpu 00.7G ram 017.8G]         Epoch 12/100: Train loss: 0.0214, Train acc: 0.9964, Val loss: 2.5020, Val AUROC: 0.6971
+[15:44:24 gpu 00.7G ram 017.8G]         Early stopping triggered after 12 epochs
+[15:44:24 gpu 00.7G ram 017.8G]         Training complete. Best validation AUROC: 0.7450
+[15:44:27 gpu 00.3G ram 014.8G] Population, Fold 1, Bin 0-1: Train accuracy: 0.707, Test accuracy: 0.502, Train ROC AUC: 0.865, Test ROC AUC: 0.692
+[15:44:27 gpu 00.3G ram 014.8G] Regression run in 88.13 seconds
+[15:44:27 gpu 00.3G ram 014.8G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_word_index.json
+[15:44:28 gpu 00.3G ram 014.8G] Fold 1, Bin 0-1
+[15:44:28 gpu 00.3G ram 014.8G]     Preparing and preprocessing data...
+[15:54:03 gpu 00.3G ram 016.8G]     Standardizing data...
+[15:54:08 gpu 00.3G ram 016.8G]     Training model...
+[15:54:08 gpu 00.3G ram 017.8G]         Training with 2800 samples, validating with 700 samples
+[15:54:09 gpu 00.7G ram 017.8G]         Epoch 1/100: Train loss: 0.6877, Train acc: 0.5318, Val loss: 0.6762, Val AUROC: 0.6090
+[15:54:09 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.6090
+[15:54:10 gpu 00.7G ram 017.8G]         Epoch 2/100: Train loss: 0.6137, Train acc: 0.6700, Val loss: 0.6944, Val AUROC: 0.6146
+[15:54:10 gpu 00.7G ram 017.8G]         New best model saved with val AUROC: 0.6146
+[15:54:11 gpu 00.7G ram 017.8G]         Epoch 3/100: Train loss: 0.5430, Train acc: 0.7246, Val loss: 0.7541, Val AUROC: 0.5899
+[15:54:12 gpu 00.7G ram 017.8G]         Epoch 4/100: Train loss: 0.5132, Train acc: 0.7504, Val loss: 0.8299, Val AUROC: 0.5747
+[15:54:13 gpu 00.7G ram 017.8G]         Epoch 5/100: Train loss: 0.5044, Train acc: 0.7464, Val loss: 0.8321, Val AUROC: 0.5705
+[15:54:14 gpu 00.7G ram 017.8G]         Epoch 6/100: Train loss: 0.5353, Train acc: 0.7425, Val loss: 0.8126, Val AUROC: 0.5698
+[15:54:15 gpu 00.7G ram 017.8G]         Epoch 7/100: Train loss: 0.5279, Train acc: 0.7457, Val loss: 0.8024, Val AUROC: 0.5896
+[15:54:16 gpu 00.7G ram 017.8G]         Epoch 8/100: Train loss: 0.4955, Train acc: 0.7589, Val loss: 0.8434, Val AUROC: 0.5858
+[15:54:17 gpu 00.7G ram 017.8G]         Epoch 9/100: Train loss: 0.4672, Train acc: 0.7771, Val loss: 0.8994, Val AUROC: 0.5757
+[15:54:18 gpu 00.7G ram 017.8G]         Epoch 10/100: Train loss: 0.4029, Train acc: 0.8196, Val loss: 0.9515, Val AUROC: 0.5929
+[15:54:19 gpu 00.7G ram 017.8G]         Epoch 11/100: Train loss: 0.3445, Train acc: 0.8579, Val loss: 1.0655, Val AUROC: 0.5834
+[15:54:20 gpu 00.7G ram 017.8G]         Epoch 12/100: Train loss: 0.2970, Train acc: 0.8807, Val loss: 1.1494, Val AUROC: 0.5787
+[15:54:20 gpu 00.7G ram 017.8G]         Early stopping triggered after 12 epochs
+[15:54:20 gpu 00.7G ram 017.8G]         Training complete. Best validation AUROC: 0.6146
+[15:54:22 gpu 00.3G ram 014.8G] Population, Fold 1, Bin 0-1: Train accuracy: 0.674, Test accuracy: 0.550, Train ROC AUC: 0.723, Test ROC AUC: 0.568
+[15:54:22 gpu 00.3G ram 014.8G] Regression run in 595.60 seconds
+[15:54:22 gpu 00.3G ram 014.8G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_word_head_pos.json
+[15:54:24 gpu 00.3G ram 014.8G] Fold 1, Bin 0-1
+[15:54:24 gpu 00.3G ram 014.8G]     Preparing and preprocessing data...
+[16:27:15 gpu 00.3G ram 017.4G]     Standardizing data...
+[16:27:20 gpu 00.3G ram 017.4G]     Training model...
+[16:27:20 gpu 00.3G ram 018.2G]         Training with 2740 samples, validating with 685 samples
+[16:27:21 gpu 00.6G ram 018.2G]         Epoch 1/100: Train loss: 1.6102, Train acc: 0.1964, Val loss: 1.6001, Val AUROC: 0.5462
+[16:27:21 gpu 00.6G ram 018.2G]         New best model saved with val AUROC: 0.5462
+[16:27:22 gpu 00.6G ram 018.2G]         Epoch 2/100: Train loss: 1.5101, Train acc: 0.3551, Val loss: 1.6176, Val AUROC: 0.5542
+[16:27:22 gpu 00.6G ram 018.2G]         New best model saved with val AUROC: 0.5542
+[16:27:23 gpu 00.6G ram 018.2G]         Epoch 3/100: Train loss: 1.3507, Train acc: 0.4620, Val loss: 1.6850, Val AUROC: 0.5586
+[16:27:23 gpu 00.6G ram 018.2G]         New best model saved with val AUROC: 0.5586
+[16:27:24 gpu 00.6G ram 018.2G]         Epoch 4/100: Train loss: 1.1081, Train acc: 0.5901, Val loss: 1.8985, Val AUROC: 0.5529
+[16:27:25 gpu 00.6G ram 018.2G]         Epoch 5/100: Train loss: 0.7273, Train acc: 0.7609, Val loss: 2.3605, Val AUROC: 0.5395
+[16:27:26 gpu 00.6G ram 018.2G]         Epoch 6/100: Train loss: 0.3771, Train acc: 0.8861, Val loss: 2.9212, Val AUROC: 0.5412
+[16:27:27 gpu 00.6G ram 018.2G]         Epoch 7/100: Train loss: 0.2884, Train acc: 0.9033, Val loss: 3.1834, Val AUROC: 0.5381
+[16:27:29 gpu 00.6G ram 018.2G]         Epoch 8/100: Train loss: 0.3081, Train acc: 0.8905, Val loss: 3.3476, Val AUROC: 0.5404
+[16:27:30 gpu 00.6G ram 018.2G]         Epoch 9/100: Train loss: 0.1947, Train acc: 0.9423, Val loss: 3.2361, Val AUROC: 0.5405
+[16:27:31 gpu 00.6G ram 018.2G]         Epoch 10/100: Train loss: 0.1130, Train acc: 0.9672, Val loss: 3.3441, Val AUROC: 0.5487
+[16:27:32 gpu 00.6G ram 018.2G]         Epoch 11/100: Train loss: 0.0537, Train acc: 0.9891, Val loss: 3.5902, Val AUROC: 0.5490
+[16:27:33 gpu 00.6G ram 018.2G]         Epoch 12/100: Train loss: 0.0219, Train acc: 0.9978, Val loss: 3.8237, Val AUROC: 0.5460
+[16:27:34 gpu 00.6G ram 018.2G]         Epoch 13/100: Train loss: 0.0100, Train acc: 0.9993, Val loss: 3.9133, Val AUROC: 0.5465
+[16:27:34 gpu 00.6G ram 018.2G]         Early stopping triggered after 13 epochs
+[16:27:34 gpu 00.6G ram 018.2G]         Training complete. Best validation AUROC: 0.5586
+[16:27:36 gpu 00.3G ram 014.8G] Population, Fold 1, Bin 0-1: Train accuracy: 0.542, Test accuracy: 0.222, Train ROC AUC: 0.813, Test ROC AUC: 0.524
+[16:27:36 gpu 00.3G ram 014.8G] Regression run in 1993.84 seconds
+[16:27:36 gpu 00.3G ram 014.8G] Results saved to /ocean/projects/cis250217p/ylei5/Neuroprobe/data/eval_results_lite_CrossSession_multiclass/mamba_laplacian-stft_abs_nperseg512_poverlap0.75_maxfreq150/population_btbank10_1_word_part_speech.json
