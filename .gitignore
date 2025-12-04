@@ -17,4 +17,4 @@ dist/
 
 .env
 
-ckpts
+ckptsmamba/
