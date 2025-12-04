@@ -231,3 +231,4 @@ class MambaLoraWrapper:
     def score(self, X, y):
         preds = self.predict(X)
         return np.mean(preds == y)
+        
